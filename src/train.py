@@ -7,7 +7,6 @@ from data import DataModule
 from model import ColaModel
 
 
-
 def main():
     cola_data = DataModule()
     cola_model = ColaModel()
@@ -18,7 +17,6 @@ def main():
     early_stopping_callback = EarlyStopping(
         monitor="val_loss", patience=3, verbose=True, mode="min"
     )
-
 
     trainer = pl.Trainer(
         default_root_dir="logs",
@@ -31,5 +29,5 @@ def main():
     trainer.fit(cola_model, cola_data)
 
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()

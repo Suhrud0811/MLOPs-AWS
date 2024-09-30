@@ -1,13 +1,13 @@
 import torch
 import torch.nn as nn
-import pytorch_lightninig as pl
+import pytorch_lightning as pl
 import torch.nn.functional as F
 from transformers import AutoModel
 from sklearn.metrics import accuracy_score
 
 
 
-class ColaModel(pl.LightniningModue):
+class ColaModel(pl.LightningModule):
     def __init__(self,model_name = "google/bert_uncased_L-2_H-128_A-2", lr=1e-2):
         super(ColaModel, self).__init__()
         self.save_hyperparameters()
