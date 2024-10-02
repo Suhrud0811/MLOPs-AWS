@@ -167,3 +167,4 @@ myenv/
 *.cfg
 logs/
 models/
+wandb/
