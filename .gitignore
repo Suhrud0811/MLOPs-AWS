@@ -168,3 +168,5 @@ myenv/
 logs/
 models/
 wandb/
+src/multirun/
+src/outputs/
