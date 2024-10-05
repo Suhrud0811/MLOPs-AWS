@@ -8,3 +8,4 @@ torchmetrics
 matplotlib
 seaborn
 hydra-core==1.1.0
+hydra_colorlog
