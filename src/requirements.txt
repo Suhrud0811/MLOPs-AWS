@@ -1,8 +1,8 @@
 pytorch-lightning==1.2.10
-datasets==1.6.2
-transformers==4.5.1
+datasets==3.0.1
+transformers==4.45.2
 scikit-learn==0.24.2
-numpy==1.20.3
+numpy==1.24.4
 wandb
 torchmetrics
 matplotlib
