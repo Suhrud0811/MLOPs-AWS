@@ -168,3 +168,6 @@ myenv/
 logs/
 models/
 wandb/
+src/multirun/
+outputs/
+/dvc/config

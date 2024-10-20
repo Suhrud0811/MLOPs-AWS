@@ -6,6 +6,12 @@ from transformers import AutoModelForSequenceClassification
 from sklearn.metrics import accuracy_score
 import torchmetrics
 import wandb
+from omegaconf import OmegaConf
+
+
+
+
+
 
 class ColaModel(pl.LightningModule):
     def __init__(self,model_name = "google/bert_uncased_L-2_H-128_A-2", lr=3e-5):
