@@ -169,4 +169,5 @@ logs/
 models/
 wandb/
 src/multirun/
-src/outputs/
+outputs/
+/dvc/config

@@ -58,17 +58,18 @@ def main(cfg):
     # checkpoint_callback = ModelCheckpoint(
     #     dirpath="./models", monitor="val_loss", mode="min"
     # )
+    root_dir = hydra.utils.get_original_cwd()
 
     checkpoint_callback = ModelCheckpoint(
-        dirpath="./models",
-        filename="best-checkpoint.ckpt",
+        dirpath=f"{root_dir}/models",
+        filename="best-checkpoint",
         monitor="valid/loss",
         mode="min",
     )
 
 
     early_stopping_callback = EarlyStopping(
-        monitor="valid/loss", patience=3, verbose=True, mode="min"
+        monitor="valid/loss", patience=5, verbose=True, mode="min"
     )
     wandb_logger = WandbLogger(project="MLOPS-basics",entity = "MLOps-AWS")
 
