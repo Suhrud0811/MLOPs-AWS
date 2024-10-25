@@ -1,0 +1,8 @@
+.git
+__pycache__
+*.pyc
+./outputs
+.dvcignore
+.gitignore
+./README.md
+./train.py

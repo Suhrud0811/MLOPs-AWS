@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 
-@hydra.main("../configs",config_name="config.yaml")
+@hydra.main("./configs",config_name="config.yaml")
 def convert_model(cfg):
     root_dir = hydra.utils.get_original_cwd()
     model_path = f"{root_dir}/models/best-checkpoint-v4.ckpt"
