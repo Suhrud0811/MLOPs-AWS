@@ -18,7 +18,8 @@ jobs:
         run: |
           docker network create data
           docker build --tag inference:latest .
-          docker run -d -p 8000:8000 --network data --name inference_container inference:latest
+          docker run -d -p 8000:8000 --network data --name inference_container \
+            -e GDRIVE_CREDS="${{ secrets.GDRIVE_CREDS }}" inference:latest
 
       # Echo container logs
       - name: View Container Logs
