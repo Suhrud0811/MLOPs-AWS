@@ -14,7 +14,7 @@ RUN dvc remote modify storage gdrive_use_service_account true
 
 # Pass the creds.json file to the container during build
 ARG GDRIVE_CREDS
-RUN echo "$GDRIVE_CREDS" > creds.json
+RUN echo "${GDRIVE_CREDS}" | base64 --decode > creds.json
 
 # Set the path for the service account json
 RUN dvc remote modify storage gdrive_service_account_json_file_path creds.json
