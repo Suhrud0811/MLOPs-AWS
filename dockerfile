@@ -11,7 +11,7 @@ RUN pip install -r requirements.txt
 
 
 # initialise dvc
-RUN dvc init 
+RUN dvc init --no-scm -f
 RUN dvc remote add -d storage gdrive://1cMM3EbI0cl37pUdOFMUrZTEpxCxr5VPV
 RUN dvc remote modify storage gdrive_use_service_account true
 RUN dvc remote modify storage gdrive_service_account_json_file_path creds.json
