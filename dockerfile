@@ -10,16 +10,20 @@ RUN pip install -r requirements.txt
 # Initialize DVC
 RUN dvc init --no-scm -f
 RUN dvc remote add -d storage gdrive://1cMM3EbI0cl37pUdOFMUrZTEpxCxr5VPV
+RUN dvc remote modify storage gdrive_use_service_account true
 
-ENV LC_ALL=C.UTF-8
-ENV LANG=C.UTF-8
+# Pass the creds.json file to the container during build
+ARG GDRIVE_CREDS
+RUN echo "$GDRIVE_CREDS" > creds.json
+
+# Set the path for the service account json
+RUN dvc remote modify storage gdrive_service_account_json_file_path creds.json
+
+# Pull the trained model
+RUN dvc pull models/trained-model.ckpt.dvc
+
+# Expose the necessary port
 EXPOSE 8000
 
-# Create creds.json file using the secret passed as an environment variable
-CMD /bin/bash -c 'echo "$GDRIVE_CREDS" > creds.json && \
-    dvc remote modify storage gdrive_service_account_json_file_path creds.json && \
-    dvc pull models/trained-model.ckpt.dvc && \
-    uvicorn app:app --host 0.0.0.0 --port 8000'
-
-
-
+# Command to start the application
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

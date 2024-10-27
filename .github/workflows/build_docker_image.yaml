@@ -7,19 +7,22 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./
+        working-directory: ./ 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
 
-      - name: Build and Run Container
+      - name: Build Docker Image
         run: |
           docker network create data
-          docker build --tag inference:latest .
-          docker run -d -p 8000:8000 --network data --name inference_container \
-            -e GDRIVE_CREDS="${{ secrets.GDRIVE_CREDS }}" inference:latest
+          docker build --tag inference:latest --build-arg GDRIVE_CREDS="${{ secrets.GDRIVE_CREDS }}" .
+
+      # Optional: Run the container
+      - name: Run Container
+        run: |
+          docker run -d -p 8000:8000 --network data --name inference_container inference:latest
 
       # Echo container logs
       - name: View Container Logs
