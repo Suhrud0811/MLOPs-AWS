@@ -172,3 +172,4 @@ src/multirun/
 outputs/
 /dvc/config
 /dvcfiles/*.ckpt
+/creds.json

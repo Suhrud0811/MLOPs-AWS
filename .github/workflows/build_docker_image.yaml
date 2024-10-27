@@ -1,0 +1,39 @@
+name: Create Docker Container
+
+on: [push]
+
+jobs:
+  mlops-container:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./cicd_github_actions
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Build and Run Container
+        run: |
+          docker network create data
+          docker build --tag inference:latest .
+          docker run -d -p 8000:8000 --network data --name inference_container inference:latest
+
+      # Echo container logs
+      - name: View Container Logs
+        run: |
+          echo "Container logs:"
+          docker logs inference_container
+
+      # Stop and Remove Container, then confirm removal
+      - name: Stop and Remove Container
+        run: |
+          docker stop inference_container
+          docker rm inference_container
+          echo "Container 'inference_container' has been removed."
+
+      # Optional: Clean up Docker Network
+      - name: Remove Docker Network
+        run: |
+          docker network rm data
