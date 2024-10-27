@@ -166,7 +166,7 @@ Scripts/
 myenv/
 *.cfg
 logs/
-models/
+models/*.ckpt
 wandb/
 src/multirun/
 outputs/
