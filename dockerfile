@@ -28,21 +28,20 @@ ARG UNIVERSE_DOMAIN
 
 
 # Set environment variables to match Google service account JSON fields
-ENV type=$TYPE
-ENV project_id=$PROJECT_ID
-ENV private_key_id=$PRIVATE_KEY_ID
-ENV private_key=$PRIVATE_KEY
-ENV client_email=$CLIENT_EMAIL
-ENV client_id=$CLIENT_ID
-ENV auth_uri=$AUTH_URI
-ENV token_uri=$TOKEN_URI
-ENV auth_provider_x509_cert_url=$AUTH_PROVIDER_X509_CERT_URL
-ENV client_x509_cert_url=$CLIENT_X509_CERT_URL
-ENV universe_domain=$GDRIVE_UNIVERSE_DOMAIN
+RUN echo '{
+  "type": "'${GDRIVE_TYPE}'",
+  "project_id": "'${GDRIVE_PROJECT_ID}'",
+  "private_key": "'${GDRIVE_PRIVATE_KEY}'",
+  "client_email": "'${GDRIVE_CLIENT_EMAIL}'",
+  "client_id": "'${GDRIVE_CLIENT_ID}'",
+  "auth_uri": "'${GDRIVE_AUTH_URI}'",
+  "token_uri": "'${GDRIVE_TOKEN_URI}'",
+  "auth_provider_x509_cert_url": "'${GDRIVE_AUTH_PROVIDER_CERT_URL}'",
+  "client_x509_cert_url": "'${GDRIVE_CLIENT_CERT_URL}'"
+}' > /app/creds.json
 
 # Set the path for the service account json
-RUN dvc remote modify storage gdrive_use_service_account true
-
+RUN dvc remote modify storage gdrive_service_account_json_file_path /app/creds.json
 # Pull the trained model
 RUN dvc pull models/trained-model.ckpt.dvc
 
