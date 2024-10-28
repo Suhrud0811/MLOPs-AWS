@@ -32,6 +32,7 @@ RUN printf '{\n'\
 '  "type": "%s",\n'\
 '  "project_id": "%s",\n'\
 '  "private_key": "%s",\n'\
+'  "private_key_id": "%s",\n'\
 '  "client_email": "%s",\n'\
 '  "client_id": "%s",\n'\
 '  "auth_uri": "%s",\n'\
@@ -43,6 +44,7 @@ RUN printf '{\n'\
 "${TYPE}" \
 "${PROJECT_ID}" \
 "${PRIVATE_KEY}" \
+"${PRIVATE_KEY_ID}" \
 "${CLIENT_EMAIL}" \
 "${CLIENT_ID}" \
 "${AUTH_URI}" \
