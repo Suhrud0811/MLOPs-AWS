@@ -27,7 +27,7 @@ ARG UNIVERSE_DOMAIN
 
 
 
-# Create the creds.json file using printf
+# Create the creds.json file (assuming you already have this part)
 RUN printf '{\n'\
 '  "type": "%s",\n'\
 '  "project_id": "%s",\n'\
@@ -38,18 +38,19 @@ RUN printf '{\n'\
 '  "token_uri": "%s",\n'\
 '  "auth_provider_x509_cert_url": "%s",\n'\
 '  "client_x509_cert_url": "%s"\n'\
+'  "universe_domain": "%s"\n'\
 '}' \
 "${TYPE}" \
 "${PROJECT_ID}" \
-"${PRIVATE_KEY_ID}" \
 "${PRIVATE_KEY}" \
 "${CLIENT_EMAIL}" \
 "${CLIENT_ID}" \
 "${AUTH_URI}" \
 "${TOKEN_URI}" \
+"${AUTH_PROVIDER_X509_CERT_URL}" \
 "${CLIENT_X509_CERT_URL}" \
-"${UNIVERSE_DOMAIN}" \
-"${AUTH_PROVIDER_X509_CERT_URL}" > /app/creds.json
+"${UNIVERSE_DOMAIN}" > /app/creds.json
+
 
 
 
