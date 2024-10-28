@@ -20,7 +20,17 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build --tag inference:latest --build-arg GDRIVE_CREDS="${{ secrets.GDRIVE_CREDS }}" .
+          docker build --tag inference:latest \
+            --build-arg TYPE="${{ secrets.GDRIVE_TYPE }}" \
+            --build-arg PROJECT_ID="${{ secrets.GDRIVE_PROJECT_ID }}" \
+            --build-arg PRIVATE_KEY="${{ secrets.GDRIVE_PRIVATE_KEY }}" \
+            --build-arg CLIENT_EMAIL="${{ secrets.GDRIVE_CLIENT_EMAIL }}" \
+            --build-arg CLIENT_ID="${{ secrets.GDRIVE_CLIENT_ID }}" \
+            --build-arg AUTH_URI="${{ secrets.GDRIVE_AUTH_URI }}" \
+            --build-arg TOKEN_URI="${{ secrets.GDRIVE_TOKEN_URI }}" \
+            --build-arg AUTH_PROVIDER_X509_CERT_URL="${{ secrets.GDRIVE_AUTH_PROVIDER_CERT_URL }}" \
+            --build-arg CLIENT_X509_CERT_URL="${{ secrets.GDRIVE_CLIENT_CERT_URL }}" \
+            --build-arg UNIVERSE_DOMAIN="${{ secrets.GDRIVE_UNIVERSE_DOMAIN }}" .
 
       # Optional: Run the container
       - name: Run Container
