@@ -1,6 +1,10 @@
 name: Create Docker Container
 
-on: [push]
+on:
+  push:
+    branches:
+      - cicd  # New branch you want to trigger the workflow on
+      # Add other branches as needed
 
 jobs:
   mlops-container:
