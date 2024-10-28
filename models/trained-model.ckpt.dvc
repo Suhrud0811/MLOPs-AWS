@@ -1,4 +1,5 @@
 outs:
-- path: trained-model.ckpt
-  md5: 89dc839cd67c71f6f41af5101bbce0af
+- md5: 89dc839cd67c71f6f41af5101bbce0af
   size: 52684520
+  hash: md5
+  path: trained-model.ckpt
