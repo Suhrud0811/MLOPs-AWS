@@ -35,13 +35,14 @@ RUN dvc remote add -d model-store s3://models-dvc/trained_models/
 # Configure Google Drive as remote storage
 # RUN dvc remote add -d storage gdrive://1cMM3EbI0cl37pUdOFMUrZTEpxCxr5VPV
 # RUN dvc remote modify storage gdrive_use_service_account true
+RUN dvc remote modify model-store region us-east-2  # Replace with your region
 
 
 RUN cat .dvc/config
 
 
 # pulling the trained model
-RUN dvc pull ./models/model.onnx.dvc
+RUN dvc pull ./models/model.onnx.dvc --verbose
 
 
 # FOR PASSING CREDS TO GOOGLE DRIVE
