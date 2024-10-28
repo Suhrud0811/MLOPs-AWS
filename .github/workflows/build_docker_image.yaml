@@ -1,0 +1,56 @@
+name: Create Docker Container
+
+on: [push]
+
+jobs:
+  mlops-container:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Create Docker Network
+        run: |
+          docker network create data
+
+      - name: Build Docker Image
+        run: |
+          docker build --tag inference:latest \
+            --build-arg TYPE="${{ secrets.GDRIVE_TYPE }}" \
+            --build-arg PROJECT_ID="${{ secrets.GDRIVE_PROJECT_ID }}" \
+            --build-arg PRIVATE_KEY="${{ secrets.GDRIVE_PRIVATE_KEY }}" \
+            --build-arg CLIENT_EMAIL="${{ secrets.GDRIVE_CLIENT_EMAIL }}" \
+            --build-arg CLIENT_ID="${{ secrets.GDRIVE_CLIENT_ID }}" \
+            --build-arg AUTH_URI="${{ secrets.GDRIVE_AUTH_URI }}" \
+            --build-arg TOKEN_URI="${{ secrets.GDRIVE_TOKEN_URI }}" \
+            --build-arg AUTH_PROVIDER_X509_CERT_URL="${{ secrets.GDRIVE_AUTH_PROVIDER_CERT_URL }}" \
+            --build-arg CLIENT_X509_CERT_URL="${{ secrets.GDRIVE_CLIENT_CERT_URL }}" \
+            --build-arg UNIVERSE_DOMAIN="${{ secrets.GDRIVE_UNIVERSE_DOMAIN }}" .
+
+      # Optional: Run the container
+      - name: Run Container
+        run: |
+          docker run -d -p 8000:8000 --network data --name inference_container inference:latest
+
+      # Echo container logs
+      - name: View Container Logs
+        run: |
+          echo "Container logs:"
+          docker logs inference_container
+
+      # Stop and Remove Container, then confirm removal
+      - name: Stop and Remove Container
+        run: |
+          docker stop inference_container
+          docker rm inference_container
+          echo "Container 'inference_container' has been removed."
+
+      # Optional: Clean up Docker Network
+      - name: Remove Docker Network
+        run: |
+          docker network rm data
