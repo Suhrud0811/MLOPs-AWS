@@ -3,7 +3,8 @@ name: Create Docker Container
 on:
   push:
     branches:
-      - ECR  # This branch will trigger the workflow
+      - ECR  # This branch will trigger the workflowM
+      - Master
 
 jobs:
   mlops-container:
