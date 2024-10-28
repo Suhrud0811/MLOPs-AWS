@@ -1,6 +1,4 @@
 [core]
-    remote = storage
-['remote "storage"']
-    url = gdrive://1cMM3EbI0cl37pUdOFMUrZTEpxCxr5VPV
-    gdrive_use_service_account = true
-    gdrive_service_account_json_file_path = ../creds.json
+    remote = model-store
+['remote "model-store"']
+    url = s3://models-dvc/trained_models/
