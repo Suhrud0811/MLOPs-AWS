@@ -37,7 +37,7 @@ RUN printf '{\n'\
 '  "auth_uri": "%s",\n'\
 '  "token_uri": "%s",\n'\
 '  "auth_provider_x509_cert_url": "%s",\n'\
-'  "client_x509_cert_url": "%s"\n'\
+'  "client_x509_cert_url": "%s",\n'\
 '  "universe_domain": "%s"\n'\
 '}' \
 "${TYPE}" \
@@ -50,7 +50,6 @@ RUN printf '{\n'\
 "${AUTH_PROVIDER_X509_CERT_URL}" \
 "${CLIENT_X509_CERT_URL}" \
 "${UNIVERSE_DOMAIN}" > /app/creds.json
-
 
 
 
