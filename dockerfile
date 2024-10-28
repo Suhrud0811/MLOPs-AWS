@@ -51,6 +51,11 @@ RUN printf '{\n'\
 "${UNIVERSE_DOMAIN}" \
 "${AUTH_PROVIDER_X509_CERT_URL}" > /app/creds.json
 
+
+
+RUN cat /app/creds.json
+
+
 # Configure DVC to use the credentials
 RUN dvc remote modify storage gdrive_service_account_json_file_path /app/creds.json
 # Pull the trained model
