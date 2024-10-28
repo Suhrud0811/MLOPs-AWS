@@ -27,20 +27,29 @@ ARG UNIVERSE_DOMAIN
 
 
 
-# Set environment variables to match Google service account JSON fields
-RUN echo '{
-  "type": "'${GDRIVE_TYPE}'",
-  "project_id": "'${GDRIVE_PROJECT_ID}'",
-  "private_key": "'${GDRIVE_PRIVATE_KEY}'",
-  "client_email": "'${GDRIVE_CLIENT_EMAIL}'",
-  "client_id": "'${GDRIVE_CLIENT_ID}'",
-  "auth_uri": "'${GDRIVE_AUTH_URI}'",
-  "token_uri": "'${GDRIVE_TOKEN_URI}'",
-  "auth_provider_x509_cert_url": "'${GDRIVE_AUTH_PROVIDER_CERT_URL}'",
-  "client_x509_cert_url": "'${GDRIVE_CLIENT_CERT_URL}'"
-}' > /app/creds.json
+# Create the creds.json file using printf
+RUN printf '{\n'\
+'  "type": "%s",\n'\
+'  "project_id": "%s",\n'\
+'  "private_key": "%s",\n'\
+'  "client_email": "%s",\n'\
+'  "client_id": "%s",\n'\
+'  "auth_uri": "%s",\n'\
+'  "token_uri": "%s",\n'\
+'  "auth_provider_x509_cert_url": "%s",\n'\
+'  "client_x509_cert_url": "%s"\n'\
+'}' \
+"${GDRIVE_TYPE}" \
+"${GDRIVE_PROJECT_ID}" \
+"${GDRIVE_PRIVATE_KEY}" \
+"${GDRIVE_CLIENT_EMAIL}" \
+"${GDRIVE_CLIENT_ID}" \
+"${GDRIVE_AUTH_URI}" \
+"${GDRIVE_TOKEN_URI}" \
+"${GDRIVE_AUTH_PROVIDER_CERT_URL}" \
+"${GDRIVE_CLIENT_CERT_URL}" > /app/creds.json
 
-# Set the path for the service account json
+# Configure DVC to use the credentials
 RUN dvc remote modify storage gdrive_service_account_json_file_path /app/creds.json
 # Pull the trained model
 RUN dvc pull models/trained-model.ckpt.dvc
