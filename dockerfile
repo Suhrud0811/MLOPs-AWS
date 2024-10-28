@@ -39,15 +39,17 @@ RUN printf '{\n'\
 '  "auth_provider_x509_cert_url": "%s",\n'\
 '  "client_x509_cert_url": "%s"\n'\
 '}' \
-"${GDRIVE_TYPE}" \
-"${GDRIVE_PROJECT_ID}" \
-"${GDRIVE_PRIVATE_KEY}" \
-"${GDRIVE_CLIENT_EMAIL}" \
-"${GDRIVE_CLIENT_ID}" \
-"${GDRIVE_AUTH_URI}" \
-"${GDRIVE_TOKEN_URI}" \
-"${GDRIVE_AUTH_PROVIDER_CERT_URL}" \
-"${GDRIVE_CLIENT_CERT_URL}" > /app/creds.json
+"${TYPE}" \
+"${PROJECT_ID}" \
+"${PRIVATE_KEY_ID}" \
+"${PRIVATE_KEY}" \
+"${CLIENT_EMAIL}" \
+"${CLIENT_ID}" \
+"${AUTH_URI}" \
+"${TOKEN_URI}" \
+"${CLIENT_X509_CERT_URL}" \
+"${UNIVERSE_DOMAIN}" \
+"${AUTH_PROVIDER_X509_CERT_URL}" > /app/creds.json
 
 # Configure DVC to use the credentials
 RUN dvc remote modify storage gdrive_service_account_json_file_path /app/creds.json
