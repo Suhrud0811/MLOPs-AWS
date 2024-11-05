@@ -1,4 +1,4 @@
-FROM amazon/aws-lambda-python
+FROM amazon/aws-lambda-python:3.8
 
 
 ARG AWS_ACCESS_KEY_ID
