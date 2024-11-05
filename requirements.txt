@@ -11,3 +11,4 @@ tokenizers==0.10.2
 transformers==4.5.1
 dvc==2.10.1
 fsspec==2021.11.1
+tqdm>=4.63.1,<5
