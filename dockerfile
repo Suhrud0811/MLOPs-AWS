@@ -1,4 +1,4 @@
-FROM amazon/aws-lambda-python:3.8
+FROM amazon/aws-lambda-python:3.9
 
 
 ARG AWS_ACCESS_KEY_ID
@@ -25,7 +25,7 @@ RUN pip install "dvc[s3]"
 
 # configuring remote server in dvc
 
-RUN dvc init --no-scm
+RUN dvc init --no-scm -f
 RUN dvc remote add -d model-store s3://models-dvc/trained_models/
 
 
