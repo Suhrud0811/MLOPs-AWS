@@ -6,9 +6,9 @@ RUN yum install -y git gcc-c++ && \
     yum clean all
 
 # Copy in requirements and install dependencies
-COPY requirements_inference.txt .
+COPY requirements.txt .
 RUN python3 -m ensurepip && \
-    pip3 install -r requirements_inference.txt --no-cache-dir -t /build
+    pip3 install -r requirements.txt --no-cache-dir -t /build
 
 # Install DVC with S3 support
 RUN pip3 install "dvc[s3]" --no-cache-dir -t /build
