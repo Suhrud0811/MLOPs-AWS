@@ -1,14 +1,21 @@
 # Stage 1: Build with amazonlinux to install required packages
 FROM amazonlinux:2 AS build
 
-# Install necessary tools
+# Install git, gcc-c++, Python, and pip
 RUN yum install -y git gcc-c++ && \
+    amazon-linux-extras enable python3.8 && \
+    yum install -y python3.8 && \
+    python3.8 -m ensurepip && \
     yum clean all
 
-# Copy in requirements and install dependencies
-COPY requirements.txt .
-RUN python3 -m ensurepip && \
-    pip3 install -r requirements.txt --no-cache-dir -t /build
+# Set Python and Pip aliases to use python3 and pip3 as commands
+RUN ln -s /usr/bin/python3.8 /usr/bin/python && \
+    ln -s /usr/bin/python3.8 /usr/bin/python3 && \
+    ln -s /usr/local/bin/pip3 /usr/bin/pip3
+
+# Copy in requirements and install dependencies to /build
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt --no-cache-dir -t /build
 
 # Install DVC with S3 support
 RUN pip3 install "dvc[s3]" --no-cache-dir -t /build
