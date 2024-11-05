@@ -11,3 +11,4 @@ dvc
 tokenizers==0.10.2
 transformers==4.5.1
 fsspec==2022.11.0
+packaging==21.3
