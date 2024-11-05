@@ -1,5 +1,5 @@
 import json
-from inference_onnx import ColaONNXPredictor
+from onnxInference import ColaONNXPredictor
 
 
 inferencing_instance = ColaONNXPredictor("./models/model.onnx")
