@@ -12,8 +12,8 @@ ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
     AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 
 RUN yum install git -y && yum -y install gcc-c++
-COPY requirements_inference.txt requirements_inference.txt
-RUN pip install -r requirements_inference.txt --no-cache-dir
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt --no-cache-dir
 COPY ./ ./
 ENV PYTHONPATH "${PYTHONPATH}:./"
 ENV LC_ALL=C.UTF-8
